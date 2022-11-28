@@ -6,6 +6,7 @@ class Clock {
     LocalDateTime dateTime = LocalDateTime.now();
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
     String formattedTime = dateTime.format(dtf);
-    System.out.printf("The current time is %s \n", formattedTime);
+    String redWord = "\u001B[31m" + "time" + "\u001B[37m";
+    System.out.printf("The current %s is %s \n", redWord, formattedTime);
   }  
 }
