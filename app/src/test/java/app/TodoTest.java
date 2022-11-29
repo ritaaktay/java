@@ -10,7 +10,6 @@ public class TodoTest {
   @Test 
   public void testStartWithEmptyTodoList() {
     Todo todo = new Todo();
-    ArrayList<String> empty = new ArrayList<String>();
     assertTrue("initializes with empty todo list", todo.todos.isEmpty());
   }
 
