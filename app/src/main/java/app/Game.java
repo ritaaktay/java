@@ -8,11 +8,10 @@ public class Game {
   }
 
   public String getWordToGuess() {
-    StringBuilder hidden = new StringBuilder();
-    hidden.append(word.charAt(0));
+    StringBuilder sBuilder = new StringBuilder(word);
     for (int i = 1; i < word.length(); i++) {
-      hidden.append("_");
+      sBuilder.replace(i, i+1, "_");
     }
-    return hidden.toString();
+    return sBuilder.toString();
   }
 }
