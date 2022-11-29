@@ -1,17 +1,37 @@
 package app;
 
-public class Game {
-  String word;
+import java.util.*;
 
-  Game(String w) {
-    word = w;
+public class Game {
+  int attempts = 10;
+  static final String[] DICTIONARY = {"MAKERS", "CANDIES", "DEVELOPER", "LONDON"};
+
+  Game() {
+  }
+
+  public static void main(String[] args) {
+    System.out.println(Math.random());
+  }
+
+  public String[] getDictionary() {
+    return DICTIONARY;
   }
 
   public String getWordToGuess() {
+    String word = getRandomWordFromDictionary();
     StringBuilder sBuilder = new StringBuilder(word);
     for (int i = 1; i < word.length(); i++) {
       sBuilder.replace(i, i+1, "_");
     }
     return sBuilder.toString();
+  }
+
+  public int getRemainingAttempts() {
+    return attempts;
+  }
+
+  public String getRandomWordFromDictionary() {
+    int randI = (int)Math.floor(Math.random()*((DICTIONARY.length - 1) - 0 +1));
+    return DICTIONARY[randI];
   }
 }
