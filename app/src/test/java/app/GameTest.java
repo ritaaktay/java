@@ -19,11 +19,4 @@ public class GameTest {
     assertEquals(10, game.getRemainingAttempts());
   }
 
-  @Test
-  public void testGetsRandomWord() {
-    Game game = new Game();
-    String word = game.getRandomWordFromDictionary();
-    ArrayList<String> dictionary = new ArrayList<>(Arrays.asList(game.getDictionary()));
-    assertTrue(dictionary.contains(word));
-  }
 }

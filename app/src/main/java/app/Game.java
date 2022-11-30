@@ -26,10 +26,4 @@ public class Game {
   public int getRemainingAttempts() {
     return attempts;
   }
-
-  public String getRandomWordFromDictionary() {
-    Random rand = new Random();
-    int randI = rand.nextInt(DICTIONARY.length-1);
-    return DICTIONARY[randI];
-  }
 }
