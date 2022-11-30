@@ -21,7 +21,6 @@ public class WordChooserTest {
     assertEquals(dict, testDict);
   }
 
-
   @Test
   public void testGetsRandomWord() {
     WordChooser wChsr = new WordChooser(dict);

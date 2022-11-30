@@ -1,10 +1,10 @@
 package app;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
-
 import java.util.*;
+import static org.mockito.Mockito.*;
+
 
 public class GameTest {
   @Test
