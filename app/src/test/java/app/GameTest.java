@@ -38,7 +38,7 @@ public class GameTest {
     Game game = new Game(mockChooser);
     game.getWordToGuess();
     assertEquals(true, game.guessLetter('P'));
-    assertTrue(game.guessed.contains('P'));
+    assertTrue(game.guessedLetters.contains('P'));
     assertEquals(10, game.getRemainingAttempts());
   }
 

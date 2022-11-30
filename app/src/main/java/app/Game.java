@@ -6,7 +6,7 @@ public class Game {
   WordChooser wChooser;
   Integer attempts = 10;
   String word;
-  ArrayList<Character> guessed = new ArrayList<Character>();
+  ArrayList<Character> guessedLetters = new ArrayList<Character>();
 
   Game(WordChooser wChsr) {
     wChooser = wChsr;
@@ -31,7 +31,7 @@ public class Game {
 
   public Boolean guessLetter(Character letter) {
     if (word.indexOf(letter) > -1) {
-      guessed.add(letter);
+      guessedLetters.add(letter);
       return true;
     } else {
       attempts--;
