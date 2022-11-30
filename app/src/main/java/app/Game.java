@@ -10,6 +10,7 @@ public class Game {
 
   Game(WordChooser wChsr) {
     wChooser = wChsr;
+    word = wChooser.getRandomWordFromDictionary();
   }
 
   public static void main(String[] args) {
@@ -17,10 +18,11 @@ public class Game {
   }
 
   public String getWordToGuess() {
-    word = wChooser.getRandomWordFromDictionary();
     StringBuilder sBuilder = new StringBuilder(word);
     for (int i = 1; i < word.length(); i++) {
-      sBuilder.replace(i, i+1, "_");
+      if (!guessedLetters.contains(sBuilder.charAt(i))) {
+        sBuilder.replace(i, i+1, "_");
+      }
     }
     return sBuilder.toString();
   }

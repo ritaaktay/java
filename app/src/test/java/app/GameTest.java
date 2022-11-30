@@ -42,4 +42,13 @@ public class GameTest {
     assertEquals(10, game.getRemainingAttempts());
   }
 
+  @Test
+  public void testGetsWordToGuessAfterOneGuess() {
+    WordChooser mockChooser = mock(WordChooser.class);
+    when(mockChooser.getRandomWordFromDictionary()).thenReturn("JAVASCRIPT");
+    Game game = new Game(mockChooser);
+    game.guessLetter('A');
+    assertTrue(game.guessedLetters.contains('A'));
+    assertEquals("JA_A______", game.getWordToGuess());
+  }
 }
