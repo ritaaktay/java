@@ -16,15 +16,15 @@ public class WordChooserTest {
 
   @Test
   public void itHasADictionary() {
-    WordChooser wChsr = new WordChooser(dict);
-    ArrayList<String> testDict =  wChsr.DICTIONARY;
+    WordChooser wChooser = new WordChooser(dict);
+    ArrayList<String> testDict =  wChooser.DICTIONARY;
     assertEquals(dict, testDict);
   }
 
   @Test
   public void testGetsRandomWord() {
-    WordChooser wChsr = new WordChooser(dict);
-    String word = wChsr.getRandomWordFromDictionary();
+    WordChooser wChooser = new WordChooser(dict);
+    String word = wChooser.getRandomWordFromDictionary();
     assertTrue(dict.contains(word));
   }
 }

@@ -9,13 +9,16 @@ import static org.mockito.Mockito.*;
 public class GameTest {
   @Test
   public void testGetsWordToGuess() {
-    Game game = new Game();
-    assertEquals("T________", game.getWordToGuess());
+    WordChooser wChooser = mock(WordChooser.class);
+    when(wChooser.getRandomWordFromDictionary()).thenReturn("JAVASCRIPT");
+    Game game = new Game(wChooser);
+    assertEquals("J_________", game.getWordToGuess());
   }
 
   @Test
   public void testHas10Attempts() {
-    Game game = new Game();
+    WordChooser wChooser = mock(WordChooser.class);
+    Game game = new Game(wChooser);
     assertEquals(10, game.getRemainingAttempts());
   }
 
