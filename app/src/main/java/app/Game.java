@@ -1,21 +1,19 @@
 package app;
 
-import java.util.*;
-
 public class Game {
   int attempts = 10;
-  static final String[] DICTIONARY = {"MAKERS", "CANDIES", "DEVELOPER", "LONDON"};
+  WordChooser wChooser;
+
+  Game(WordChooser wChsr) {
+    wChooser = wChsr;
+  }
 
   public static void main(String[] args) {
     System.out.println(Math.random());
   }
 
-  public String[] getDictionary() {
-    return DICTIONARY;
-  }
-
   public String getWordToGuess() {
-    String word = getRandomWordFromDictionary();
+    String word = wChooser.getRandomWordFromDictionary();
     StringBuilder sBuilder = new StringBuilder(word);
     for (int i = 1; i < word.length(); i++) {
       sBuilder.replace(i, i+1, "_");
