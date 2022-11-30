@@ -6,9 +6,6 @@ public class Game {
   int attempts = 10;
   static final String[] DICTIONARY = {"MAKERS", "CANDIES", "DEVELOPER", "LONDON"};
 
-  Game() {
-  }
-
   public static void main(String[] args) {
     System.out.println(Math.random());
   }
@@ -32,7 +29,7 @@ public class Game {
 
   public String getRandomWordFromDictionary() {
     Random rand = new Random();
-    int randI = rand.nextInt(DICTIONARY.length -1);
+    int randI = rand.nextInt(DICTIONARY.length-1);
     return DICTIONARY[randI];
   }
 }
