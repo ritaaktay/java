@@ -27,8 +27,7 @@ public class GameTest {
     when(mockChooser.getRandomWordFromDictionary()).thenReturn("JAVASCRIPT");
     Game game = new Game(mockChooser);
     game.getWordToGuess();
-    Boolean result = game.guessLetter('Q');
-    assertFalse(result);
+    assertEquals(false, game.guessLetter('Q'));
     assertEquals(9, game.getRemainingAttempts());
   }
 
@@ -38,8 +37,7 @@ public class GameTest {
     when(mockChooser.getRandomWordFromDictionary()).thenReturn("JAVASCRIPT");
     Game game = new Game(mockChooser);
     game.getWordToGuess();
-    Boolean result = game.guessLetter('P');
-    assertTrue(result);
+    assertEquals(true, game.guessLetter('P'));
     assertTrue(game.guessed.contains('P'));
     assertEquals(10, game.getRemainingAttempts());
   }
