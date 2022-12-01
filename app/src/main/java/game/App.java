@@ -6,13 +6,13 @@ import java.util.Scanner;
 
 public class App {
   public static void main(String[] args) {
+    print("Today your word to guess is:");
     Game game = setup();
     run(game);
     end(game.win());
   }
 
   public static Game setup() {
-    print("Today your word to guess is:");
     ArrayList<String> dict = new ArrayList<String>(Arrays.asList("SAILING"));
     WordChooser wChooser = new WordChooser(dict);
     return new Game(wChooser);
@@ -20,22 +20,22 @@ public class App {
 
   public static void run(Game game){
     Scanner sc = new Scanner(System.in);
-    while(game.getRemainingAttempts() > 0 && !game.win()) {
+    while(game.getRemainingAttempts() > 0) {
       print(game.getWordToGuess());
-      if (!game.win()) {
+      if (game.win()) {
+        break;
+      } else {
         Character letter = sc.nextLine().charAt(0);
         game.guessLetter(letter);
+        System.out.println(game.getRemainingAttempts());
       }
     }
     sc.close();
   }
 
   public static void end(Boolean win) {
-    if (win) {
-      print("CONGRATULATIONS!");
-    } else {
-      print("BETTER LUCK NEXT TIME...");
-    }
+    String message = win ? "CONGRATULATIONS!" : "BETTER LUCK NEXT TIME...";
+    print(message);
   }
 
   public static void print(String message) {
