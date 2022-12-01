@@ -8,6 +8,6 @@ public class App {
     ArrayList<String> dict = new ArrayList<String>(Arrays.asList("SAILING"));
     WordChooser wChooser = new WordChooser(dict);
     Game game = new Game(wChooser);
-    game.getWordToGuess();
+    System.out.println(game.getWordToGuess());
   }
 }
