@@ -51,4 +51,13 @@ public class GameTest {
     assertEquals(true,game.guessLetter('A'));
     assertEquals("JA_A______", game.getWordToGuess());
   }
+
+  @Test
+  public void testGuessesLetterCaseInsensitively() {
+    WordChooser mockChooser = mock(WordChooser.class);
+    when(mockChooser.getRandomWordFromDictionary()).thenReturn("JAVASCRIPT");
+    Game game = new Game(mockChooser);
+    assertEquals(true,game.guessLetter('a'));
+    assertEquals("JA_A______", game.getWordToGuess());
+  }
 }
