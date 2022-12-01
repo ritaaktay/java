@@ -7,14 +7,19 @@ public class Game {
   Integer attempts = 10;
   String word;
   ArrayList<Character> guessedLetters = new ArrayList<Character>();
+  Boolean win = false;
 
   Game(WordChooser wChsr) {
     wChooser = wChsr;
     word = wChooser.getRandomWordFromDictionary();
   }
 
-  public static void main(String[] args) {
-    System.out.println(Math.random());
+  public Boolean win() {
+    return win;
+  }
+
+  public void checkWin(String guess) {
+    win = !guess.contains("_");
   }
 
   public String getWordToGuess() {
@@ -24,6 +29,7 @@ public class Game {
         sBuilder.replace(i, i+1, "_");
       }
     }
+    checkWin(sBuilder.toString());
     return sBuilder.toString();
   }
 

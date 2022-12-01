@@ -10,14 +10,15 @@ public class App {
     WordChooser wChooser = new WordChooser(dict);
     Game game = new Game(wChooser);
     System.out.println("Today your word to guess is:");
-    System.out.println(game.getWordToGuess());
-    // while word contains unguessed letters and attempts are greater than 10
-    // ask for letter to guess
-    // print remaining attempts
-    // print word to guess
     Scanner sc = new Scanner(System.in);
-    Character letter = sc.nextLine().charAt(0);
-    game.guessLetter(letter);
-    System.out.println(game.getWordToGuess());
+    while(game.getRemainingAttempts() > 0 && !game.win()) {
+      System.out.println(game.getWordToGuess());
+      if (!game.win()) {
+        System.out.printf("Guesses: %d\n", game.getRemainingAttempts());
+        Character letter = sc.nextLine().charAt(0);
+        game.guessLetter(letter);
+      }
+    }
+    sc.close();
   }
 }
