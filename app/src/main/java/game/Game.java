@@ -32,6 +32,7 @@ public class Game {
   }
 
   public Boolean guessLetter(Character letter) {
+    letter = Character.toUpperCase(letter);
     if (word.indexOf(letter) > -1) {
       guessedLetters.add(letter);
       return true;
