@@ -1,7 +1,8 @@
-package app;
+package game;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
+
 import static org.mockito.Mockito.*;
 
 
@@ -47,8 +48,7 @@ public class GameTest {
     WordChooser mockChooser = mock(WordChooser.class);
     when(mockChooser.getRandomWordFromDictionary()).thenReturn("JAVASCRIPT");
     Game game = new Game(mockChooser);
-    game.guessLetter('A');
-    assertTrue(game.guessedLetters.contains('A'));
+    assertEquals(true,game.guessLetter('A'));
     assertEquals("JA_A______", game.getWordToGuess());
   }
 }

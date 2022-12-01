@@ -1,4 +1,4 @@
-package app;
+package game;
 
 import java.util.ArrayList;
 
@@ -12,8 +12,11 @@ public class WordChooser {
   }
 
   public String getRandomWordFromDictionary() {
+    if (DICTIONARY.size() == 1) {
+      return DICTIONARY.get(0);
+    }
     Random rand = new Random();
-    int randI = rand.nextInt(DICTIONARY.size()-1);
+    int randI = rand.nextInt((DICTIONARY.size()-1));
     return DICTIONARY.get(randI);
   }
 }
