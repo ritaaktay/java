@@ -20,16 +20,23 @@ public class App {
 
   public static void run(Game game){
     Scanner sc = new Scanner(System.in);
-    while(game.getRemainingAttempts() > 1) {
+     do{
       print(game.getWordToGuess());
-      if (game.isGameWon()) {
-        break;
-      } else {
-        Character letter = sc.nextLine().charAt(0);
-        game.guessLetter(letter);
-        System.out.println(game.getRemainingAttempts());
-      }
-    }
+      if (game.isGameWon()) break;
+      Character letter = sc.nextLine().charAt(0);
+      game.guessLetter(letter);
+      System.out.println(game.getRemainingAttempts());
+    } while(!game.isGameLost());
+    // while(game.getRemainingAttempts() > 1) {
+    //   print(game.getWordToGuess());
+    //   if (game.isGameWon()) {
+    //     break;
+    //   } else {
+    //     Character letter = sc.nextLine().charAt(0);
+    //     game.guessLetter(letter);
+    //     System.out.println(game.getRemainingAttempts());
+    //   }
+    // }
     sc.close();
   }
 
