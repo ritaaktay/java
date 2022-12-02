@@ -60,4 +60,27 @@ public class GameTest {
     assertEquals(true,game.guessLetter('a'));
     assertEquals("JA_A______", game.getWordToGuess());
   }
+
+  @Test
+  public void testIsGameLostReturnsTrueAfter10Attempts() {
+  WordChooser mockChooser = mock(WordChooser.class);
+  when(mockChooser.getRandomWordFromDictionary()).thenReturn("JAVASCRIPT");
+  Game game = new Game(mockChooser);
+  for (int i = 0; i < 10; i++) {
+    game.guessLetter('K');
+  }
+  assertEquals(true, game.isGameLost());
+  }
+
+  @Test
+  public void testIsWonReturnsTrueAfterWordGuessed() {
+  WordChooser mockChooser = mock(WordChooser.class);
+  when(mockChooser.getRandomWordFromDictionary()).thenReturn("RUBY");
+  Game game = new Game(mockChooser);
+  game.guessLetter('R');
+  game.guessLetter('U');
+  game.guessLetter('B');
+  game.guessLetter('Y');
+  assertEquals(true, game.isGameWon());
+  }
 }
