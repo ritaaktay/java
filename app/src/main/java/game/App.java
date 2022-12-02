@@ -15,7 +15,8 @@ public class App {
   public static Game setup() {
     ArrayList<String> dict = new ArrayList<String>(Arrays.asList("SAILING"));
     WordChooser wChooser = new WordChooser(dict);
-    return new Game(wChooser);
+    Masker masker = new Masker();
+    return new Game(wChooser, masker);
   }
 
   public static void run(Game game){
