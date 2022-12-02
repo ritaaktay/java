@@ -9,7 +9,7 @@ public class App {
     print("Today your word to guess is:");
     Game game = setup();
     run(game);
-    end(game.win());
+    end(game.isGameWon());
   }
 
   public static Game setup() {
@@ -20,9 +20,9 @@ public class App {
 
   public static void run(Game game){
     Scanner sc = new Scanner(System.in);
-    while(game.getRemainingAttempts() > 0) {
+    while(game.getRemainingAttempts() > 1) {
       print(game.getWordToGuess());
-      if (game.win()) {
+      if (game.isGameWon()) {
         break;
       } else {
         Character letter = sc.nextLine().charAt(0);

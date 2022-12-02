@@ -11,6 +11,7 @@ public class Game {
   Game(WordChooser wChsr) {
     wChooser = wChsr;
     word = wChooser.getRandomWordFromDictionary();
+    guessedLetters.add(word.charAt(0));
   }
 
   public Boolean isGameWon() {
@@ -20,7 +21,6 @@ public class Game {
     return true;
   }
 
-  
   public Boolean isGameLost() {
     return attempts < 1;
   }

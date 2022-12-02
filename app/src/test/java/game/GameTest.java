@@ -77,7 +77,6 @@ public class GameTest {
   WordChooser mockChooser = mock(WordChooser.class);
   when(mockChooser.getRandomWordFromDictionary()).thenReturn("RUBY");
   Game game = new Game(mockChooser);
-  game.guessLetter('R');
   game.guessLetter('U');
   game.guessLetter('B');
   game.guessLetter('Y');
