@@ -18,6 +18,7 @@ public class GameTest {
   @Test
   public void testHas10Attempts() {
     WordChooser mockChooser = mock(WordChooser.class);
+    when(mockChooser.getRandomWordFromDictionary()).thenReturn("JAVA");
     Game game = new Game(mockChooser);
     assertEquals(10, game.getRemainingAttempts());
   }

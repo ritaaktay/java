@@ -26,13 +26,15 @@ public class Game {
   }
 
   public String getWordToGuess() {
-    StringBuilder sBuilder = new StringBuilder(word);
-    for (int i = 1; i < word.length(); i++) {
-      if (!guessedLetters.contains(sBuilder.charAt(i))) {
-        sBuilder.replace(i, i+1, "_");
-      }
-    }
-    return sBuilder.toString();
+    Masker masker = new Masker();
+    return masker.maskWord(word, guessedLetters);
+    // StringBuilder sBuilder = new StringBuilder(word);
+    // for (int i = 1; i < word.length(); i++) {
+    //   if (!guessedLetters.contains(sBuilder.charAt(i))) {
+    //     sBuilder.replace(i, i+1, "_");
+    //   }
+    // }
+    // return sBuilder.toString();
   }
 
   public int getRemainingAttempts() {
