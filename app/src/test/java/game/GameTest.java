@@ -82,4 +82,14 @@ public class GameTest {
   game.guessLetter('Y');
   assertEquals(true, game.isGameWon());
   }
+
+  @Test
+  public void testIsWonReturnsTrueWithRepeatingLetters() {
+  WordChooser mockChooser = mock(WordChooser.class);
+  when(mockChooser.getRandomWordFromDictionary()).thenReturn("COOL");
+  Game game = new Game(mockChooser);
+  game.guessLetter('O');
+  game.guessLetter('L');
+  assertEquals(true, game.isGameWon());
+  }
 }

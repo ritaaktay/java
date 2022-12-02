@@ -27,16 +27,6 @@ public class App {
       game.guessLetter(letter);
       System.out.println(game.getRemainingAttempts());
     } while(!game.isGameLost());
-    // while(game.getRemainingAttempts() > 1) {
-    //   print(game.getWordToGuess());
-    //   if (game.isGameWon()) {
-    //     break;
-    //   } else {
-    //     Character letter = sc.nextLine().charAt(0);
-    //     game.guessLetter(letter);
-    //     System.out.println(game.getRemainingAttempts());
-    //   }
-    // }
     sc.close();
   }
 
