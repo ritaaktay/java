@@ -8,8 +8,8 @@ import java.util.Random;
 public class App {
   public static void main(String[] args) {
     print("Today your word to guess is:");
-    // multiplayer(); 
-    solo();
+    multiplayer(); 
+    // solo();
   }
 
   public static void multiplayer() {
@@ -41,10 +41,10 @@ public class App {
     Scanner sc = new Scanner(System.in);
     Boolean playing;
     do{
-      print(String.format("Player %s, your turn!", indexOne + 1));
+      print(String.format("\nPlayer %s, your turn!", indexOne + 1));
       playing = runOneTurn(games[indexOne], sc);
       if (playing == false) break;
-      print(String.format("Player %s, your turn!", indexTwo + 1));
+      print(String.format("\nPlayer %s, your turn!", indexTwo + 1));
       playing = runOneTurn(games[indexTwo], sc);
     } while(playing);
     sc.close();
