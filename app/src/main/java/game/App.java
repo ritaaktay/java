@@ -8,12 +8,21 @@ import java.util.Random;
 public class App {
   public static void main(String[] args) {
     print("Today your word to guess is:");
+    multiplayer(); // solo()
+  }
+
+  public static void multiplayer() {
     Game[] games = {setup(), setup()};
     for (int i=0; i<2; i++) {
       print(String.format("Player %s: %s", i+1, games[i].getWordToGuess()));
     }
     endForTwo(runTwoGames(games));
-    // end(game.isGameWon()); //for one player
+  }
+
+  public static void solo() {
+    Game game = setup();
+
+    endForOne(game.isGameWon()); 
   }
 
   public static Game setup() {
@@ -30,17 +39,34 @@ public class App {
     Scanner sc = new Scanner(System.in);
     Boolean playing;
     do{
-      playing = runOneTurn(indexOne, games, sc);
+      print(String.format("\nPlayer %s, your turn!", indexOne + 1));
+      playing = runOneTurn(games[indexOne], sc);
       if (playing == false) break;
-      playing = runOneTurn(indexTwo, games, sc);
+      print(String.format("\nPlayer %s, your turn!", indexTwo + 1));
+      playing = runOneTurn(games[indexTwo], sc);
     } while(playing);
     sc.close();
     return games;
   }
 
-  public static Boolean runOneTurn( int index, Game[] games, Scanner sc) {
-    print(String.format("\nPlayer %s, your turn!", index+1));
-    Game game = games[index];
+
+  public static void runOneGame(Game game){
+    Scanner sc = new Scanner(System.in);
+    Boolean playing;
+    do {
+      runOneTurn(0, null, sc)
+    }
+     do{
+      print(game.getWordToGuess());
+      if (game.isGameWon()) break;
+      Character letter = sc.nextLine().charAt(0);
+      game.guessLetter(letter);
+      System.out.println(game.getRemainingAttempts());
+    } while(!game.isGameLost());
+    sc.close();
+  }
+
+  public static Boolean runOneTurn(Game game, Scanner sc) {
     print(game.getWordToGuess());
     Character letter = sc.nextLine().charAt(0);
     Boolean result = game.guessLetter(letter);
@@ -56,19 +82,7 @@ public class App {
     else return "Oops!";
   }
 
-  public static void runOneGame(Game game){
-    Scanner sc = new Scanner(System.in);
-     do{
-      print(game.getWordToGuess());
-      if (game.isGameWon()) break;
-      Character letter = sc.nextLine().charAt(0);
-      game.guessLetter(letter);
-      System.out.println(game.getRemainingAttempts());
-    } while(!game.isGameLost());
-    sc.close();
-  }
-
-  public static void end(Boolean win) {
+  public static void endForOne(Boolean win) {
     String message = win ? "CONGRATULATIONS!" : "BETTER LUCK NEXT TIME...";
     print(message);
   }
