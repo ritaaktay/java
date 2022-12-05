@@ -8,7 +8,8 @@ import java.util.Random;
 public class App {
   public static void main(String[] args) {
     print("Today your word to guess is:");
-    multiplayer(); // solo()
+    // multiplayer(); 
+    solo();
   }
 
   public static void multiplayer() {
@@ -21,8 +22,9 @@ public class App {
 
   public static void solo() {
     Game game = setup();
-
-    endForOne(game.isGameWon()); 
+    print(String.format("%s\n", game.getWordToGuess()));
+    runOneGame(game);
+    endForOne(game); 
   }
 
   public static Game setup() {
@@ -39,30 +41,22 @@ public class App {
     Scanner sc = new Scanner(System.in);
     Boolean playing;
     do{
-      print(String.format("\nPlayer %s, your turn!", indexOne + 1));
+      print(String.format("Player %s, your turn!", indexOne + 1));
       playing = runOneTurn(games[indexOne], sc);
       if (playing == false) break;
-      print(String.format("\nPlayer %s, your turn!", indexTwo + 1));
+      print(String.format("Player %s, your turn!", indexTwo + 1));
       playing = runOneTurn(games[indexTwo], sc);
     } while(playing);
     sc.close();
     return games;
   }
 
-
   public static void runOneGame(Game game){
     Scanner sc = new Scanner(System.in);
     Boolean playing;
     do {
-      runOneTurn(0, null, sc)
-    }
-     do{
-      print(game.getWordToGuess());
-      if (game.isGameWon()) break;
-      Character letter = sc.nextLine().charAt(0);
-      game.guessLetter(letter);
-      System.out.println(game.getRemainingAttempts());
-    } while(!game.isGameLost());
+      playing = runOneTurn(game, sc);
+    } while (playing);
     sc.close();
   }
 
@@ -70,10 +64,10 @@ public class App {
     print(game.getWordToGuess());
     Character letter = sc.nextLine().charAt(0);
     Boolean result = game.guessLetter(letter);
-    if (game.isGameWon() || game.isGameLost()) return false;
     print(game.getWordToGuess());
+    if (game.isGameWon() || game.isGameLost()) return false;
     print(getResult(result));
-    print(String.format("Attemps remaining: %s", game.getRemainingAttempts()));
+    print(String.format("Attemps remaining: %s\n", game.getRemainingAttempts()));
     return true;
   }
 
@@ -82,9 +76,12 @@ public class App {
     else return "Oops!";
   }
 
-  public static void endForOne(Boolean win) {
-    String message = win ? "CONGRATULATIONS!" : "BETTER LUCK NEXT TIME...";
-    print(message);
+  public static void endForOne(Game game) {
+    if (game.isGameWon()) {
+      print("\nCONGRATULATIONS!");
+    } else {
+      print("\nBETTER LUCK NEXT TIME...");
+    }
   }
 
   public static void endForTwo(Game[] games) {
