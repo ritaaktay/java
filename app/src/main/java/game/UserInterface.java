@@ -8,28 +8,36 @@ import java.util.Random;
 public class UserInterface {
   Boolean multiplayer;
   String[] words;
+  Scanner console;
 
   UserInterface(String[] wrds, Boolean mltplyr) {
     multiplayer = mltplyr;
     words = wrds;
+    console = new Scanner(System.in);
   }
 
   public void run() {
-    print("Today your word to guess is:");
     if (multiplayer) multiplayer(); 
     else solo();
+    console.close();
   }
 
   public void multiplayer() {
-    Game[] games = {setup(), setup()};
-    for (int i=0; i<2; i++) {
-      print(String.format("Player %s: %s", i+1, games[i].getWordToGuess()));
+    print("\nPlayer 1");
+    Game gameOne = setup();
+    print("\nPlayer 2");
+    Game gameTwo = setup();
+    Game[] games = {gameOne, gameTwo};
+    print("\nWelcome! Today your words to guess are:");
+    for (Game g: games) {
+      print(String.format("Player %s: %s", g.name, g.getWordToGuess()));
     }
     endForTwo(runTwoGames(games));
   }
 
   public void solo() {
     Game game = setup();
+    print(String.format("\nWelcome, %s! Today your word to guess is:", game.name));
     print(String.format("%s\n", game.getWordToGuess()));
     runOneGame(game);
     endForOne(game); 
@@ -39,38 +47,41 @@ public class UserInterface {
     ArrayList<String> dict = new ArrayList<String>(Arrays.asList(words));
     WordChooser wChooser = new WordChooser(dict);
     Masker masker = new Masker();
-    return new Game(wChooser, masker);
+    String name = getName();
+    return new Game(wChooser, masker, name);
+  }
+
+  public String getName() {
+    print("Enter your name:");
+    String name = console.nextLine();
+    return name;
   }
 
   public Game[] runTwoGames(Game[] games){
     Random rand = new Random();
     int indexOne = rand.nextInt(games.length-1);
     int indexTwo = indexOne == 0 ? 1 : 0;
-    Scanner sc = new Scanner(System.in);
     Boolean playing;
     do{
-      print(String.format("\nPlayer %s, your turn!", indexOne + 1));
-      playing = runOneTurn(games[indexOne], sc);
+      print(String.format("\n%s, your turn!", games[indexOne].name));
+      playing = runOneTurn(games[indexOne]);
       if (playing == false) break;
-      print(String.format("\nPlayer %s, your turn!", indexTwo + 1));
-      playing = runOneTurn(games[indexTwo], sc);
+      print(String.format("\n%s, your turn!", games[indexTwo].name));
+      playing = runOneTurn(games[indexTwo]);
     } while(playing);
-    sc.close();
     return games;
   }
 
   public void runOneGame(Game game){
-    Scanner sc = new Scanner(System.in);
     Boolean playing;
     do {
-      playing = runOneTurn(game, sc);
+      playing = runOneTurn(game);
     } while (playing);
-    sc.close();
   }
 
-  public Boolean runOneTurn(Game game, Scanner sc) {
+  public Boolean runOneTurn(Game game) {
     print(game.getWordToGuess());
-    Character letter = sc.nextLine().charAt(0);
+    Character letter = console.nextLine().charAt(0);
     Boolean result = game.guessLetter(letter);
     print(game.getWordToGuess());
     if (game.isGameWon() || game.isGameLost()) return false;
@@ -86,15 +97,15 @@ public class UserInterface {
 
   public void endForOne(Game game) {
     if (game.isGameWon()) {
-      print("\nCONGRATULATIONS!");
+      print("\nCongratulations!");
     } else {
-      print("\nBETTER LUCK NEXT TIME...");
+      print("\nBetter luck next time...");
     }
   }
 
   public void endForTwo(Game[] games) {
-      if (games[0].isGameWon() || games[1].isGameLost()) print(String.format("\nPlayer 1 wins!"));
-      else print(String.format("\nPlayer 2 wins!"));
+      if (games[0].isGameWon() || games[1].isGameLost()) print(String.format("\n%s wins!", games[0].name));
+      else print(String.format("\n%s wins!", games[1].name));
   }
 
   public void print(String message) {

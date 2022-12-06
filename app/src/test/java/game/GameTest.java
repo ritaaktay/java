@@ -30,26 +30,26 @@ public class GameTest {
   @Test
   public void testGetsWordToGuess() {
     when(mockMasker.maskWord("JAVASCRIPT", guessedLetters)).thenReturn("J_________");
-    Game game = new Game(mockChooser, mockMasker);
+    Game game = new Game(mockChooser, mockMasker, "Rita");
     assertEquals("J_________", game.getWordToGuess());
   }
 
   @Test
   public void testHas10Attempts() {
-    Game game = new Game(mockChooser, mockMasker);
+    Game game = new Game(mockChooser, mockMasker, "Rita");
     assertEquals(10, game.getRemainingAttempts());
   }
 
   @Test
   public void testDecrementsAttemptAtIncorrectGuess() {
-    Game game = new Game(mockChooser, mockMasker);
+    Game game = new Game(mockChooser, mockMasker, "Rita");
     assertEquals(false, game.guessLetter('Q'));
     assertEquals(9, game.getRemainingAttempts());
   }
 
   @Test
   public void testAddsToGuessedAtCorrectGuess() {
-    Game game = new Game(mockChooser, mockMasker);
+    Game game = new Game(mockChooser, mockMasker, "Rita");
     game.getWordToGuess();
     assertEquals(true, game.guessLetter('P'));
     assertTrue(game.guessedLetters.contains('P'));
@@ -60,7 +60,7 @@ public class GameTest {
   public void testGetsWordToGuessAfterOneGuess() {
     guessedLetters.add('A');
     when(mockMasker.maskWord("JAVASCRIPT", guessedLetters)).thenReturn("JA_A______");
-    Game game = new Game(mockChooser, mockMasker);
+    Game game = new Game(mockChooser, mockMasker, "Rita");
     assertEquals(true,game.guessLetter('A'));
     assertEquals("JA_A______", game.getWordToGuess());
   }
@@ -69,14 +69,14 @@ public class GameTest {
   public void testGuessesLetterCaseInsensitively() {
     guessedLetters.add('A');
     when(mockMasker.maskWord("JAVASCRIPT", guessedLetters)).thenReturn("JA_A______");
-    Game game = new Game(mockChooser, mockMasker);
+    Game game = new Game(mockChooser, mockMasker, "Rita");
     assertEquals(true,game.guessLetter('a'));
     assertEquals("JA_A______", game.getWordToGuess());
   }
 
   @Test
   public void testIsGameLostReturnsTrueAfter10Attempts() {
-  Game game = new Game(mockChooser, mockMasker);
+  Game game = new Game(mockChooser, mockMasker, "Rita");
   for (int i = 0; i < 10; i++) {
     game.guessLetter('K');
   }
@@ -85,7 +85,7 @@ public class GameTest {
 
   @Test
   public void testIsWonReturnsTrueAfterWordGuessed() {
-  Game game = new Game(mockChooser, mockMasker);
+  Game game = new Game(mockChooser, mockMasker, "Rita");
   game.guessLetter('A');
   game.guessLetter('V');
   game.guessLetter('S');

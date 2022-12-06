@@ -5,13 +5,15 @@ import java.util.ArrayList;
 public class Game {
   WordChooser wChooser;
   Masker masker;
+  String name;
   Integer attempts = 10;
   String word;
   ArrayList<Character> guessedLetters = new ArrayList<Character>();
 
-  Game(WordChooser w, Masker m) {
+  Game(WordChooser w, Masker m, String n) {
     wChooser = w;
     masker = m;
+    name = n;
     word = wChooser.getRandomWordFromDictionary();
     guessedLetters.add(word.charAt(0));
   }
