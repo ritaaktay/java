@@ -82,7 +82,7 @@ public class UserInterface {
 
   public Boolean runOneTurn(Game game) {
     print(game.getWordToGuess());
-    Character letter = console.nextLine().charAt(0);
+    Character letter = getLetter(game);
     Boolean result = game.guessLetter(letter);
     print(game.getWordToGuess());
     if (game.isGameWon() || game.isGameLost()) return false;
@@ -91,6 +91,16 @@ public class UserInterface {
     return true;
   }
 
+  public Character getLetter(Game game) {
+    Character letter;
+    do {
+      letter = console.nextLine().charAt(0);
+      if (!game.alreadyGuessed(letter)) break;
+      print("You already guessed that letter, go again:");
+    } while (true);
+    return letter;
+  }
+  
   public String getResult(Boolean result) {
     if (result == true) return "Correct!";
     else return "Oops!";
