@@ -36,6 +36,7 @@ public class UserInterface {
   }
 
   public void solo() {
+    print("\n");
     Game game = setup();
     print(String.format("\nWelcome, %s! Today your word to guess is:", game.name));
     print(String.format("%s\n", game.getWordToGuess()));
