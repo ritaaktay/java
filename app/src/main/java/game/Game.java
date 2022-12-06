@@ -45,12 +45,9 @@ public class Game {
 
   public Boolean guessLetter(Character letter) {
     letter = Character.toUpperCase(letter);
-    if (word.indexOf(letter) > -1) {
-      guessedLetters.add(letter);
-      return true;
-    } else {
-      attempts--;
-      return false;
-    }
+    guessedLetters.add(letter);
+    if (word.indexOf(letter) > -1) return true;
+    attempts--;
+    return false;
   }
 }
